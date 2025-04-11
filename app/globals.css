@@ -1,26 +1,154 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Light mode theme tokens */
+@theme{ 
+/* Base colors */
+--color-primary: #f4c542; /* Golden Sand - Primary Brand */
+--color-secondary: #1b1f3b; /* Midnight Navy - Dark Base */
+--color-accent: #b9c9ff; /* Pale Sky - Accent */
+--color-background: #f9f9f9; /* Ghost White - Background */
+--color-foreground: #1b1f3b; /* Midnight Navy - Dark Base */
+
+/* Text Colors */
+--color-text: #121212; /* Charcoal Black - Text Base */
+--color-text-muted: #444444; /* Medium Gray - Muted Gray */
+
+/* UI Colors */
+--color-cta: #121212; /* Charcoal Black - Text Base */
+--color-card: #e3e6f5; /* Soft Indigo - Card BG */
+--color-card-alt: #fff8e5; /* Warm Sand Tint - Alt Card BG */
+--color-border: #b9c9ff; /* Pale Sky - Accent */
+
+/* State Colors */
+--color-success: #10b981; /* Emerald Green - for success states */
+--color-warning: #f59e0b; /* Amber - for warnings */
+--color-info: #3b82f6; /* Blue - for information */
+--color-surface: #ffffff; /* White - for card surfaces */
+--color-surface-hover: #f3f4f6; /* Very Light Gray - for hover states */
+
+/* Tailwind HSL variables */
+--background: 0 0% 98%; /* #F9F9F9 - Ghost White */
+--foreground: 240 37% 17%; /* #1B1F3B - Midnight Navy */
+--primary: 46 89% 61%; /* #F4C542 - Golden Sand */
+--secondary: 240 37% 17%; /* #1B1F3B - Midnight Navy */
+--accent: 228 100% 86%; /* #B9C9FF - Pale Sky */
+--muted: 0 0% 27%; /* #444444 - Medium Gray */
+--muted-foreground: 0 0% 27%; /* #444444 - Medium Gray */
+--card: 234 43% 92%; /* #E3E6F5 - Soft Indigo */
+--card-foreground: 240 37% 17%; /* #1B1F3B - Midnight Navy */
+--popover: 234 43% 92%; /* #E3E6F5 - Soft Indigo */
+--popover-foreground: 240 37% 17%; /* #1B1F3B - Midnight Navy */
+--border: 228 100% 86%; /* #B9C9FF - Pale Sky */
+--input: 228 100% 86%; /* #B9C9FF - Pale Sky */
+--ring: 240 37% 17%; /* #1B1F3B - Midnight Navy */
+--radius: 0.5rem;
+
+/* Other required variables */
+--primary-foreground: 0 0% 7%; /* #121212 - Charcoal Black */
+--secondary-foreground: 0 0% 98%; /* #F9F9F9 - Ghost White */
+--destructive: 0 84% 60%;
+--destructive-foreground: 0 0% 98%;
+--cta: 0 0% 7%; /* #121212 - Charcoal Black */
+--cta-foreground: 0 0% 100%;
+
+/* Font settings */
+--font-sans: "Inter", Arial, Helvetica, sans-serif;
+--font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+
+
+
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base styles */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+/* Custom Pattern Styles */
+.card-pattern-grid {
+  background-image: linear-gradient(
+      to right,
+      rgba(64, 64, 64, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(64, 64, 64, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 0.5em 0.5em;
+  pointer-events: none;
+}
+
+.card-overlay-dots {
+  background-image: radial-gradient(
+    rgba(64, 64, 64, 0.1) 1px,
+    transparent 1px
+  );
+  background-size: 1em 1em;
+  background-position: -0.5em -0.5em;
+  pointer-events: none;
+}
+
+/* Responsive container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+}
+
+/* Retro photo frame styles */
+.retro-photo-frame {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.retro-photo-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.retro-photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.05) 50%, transparent 100%);
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
 }
