@@ -50,6 +50,10 @@ export default function QualifyPage() {
 
     setFormState((prev) => ({ ...prev, loading: true, error: "" }))
 
+    if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
+      window.gtag_report_conversion();
+    }
+    
     try {
       const response = await fetch("/api/send-contact", {
         method: "POST",
@@ -102,7 +106,8 @@ export default function QualifyPage() {
   }
 
   return (
-
+    
+   
     <div className="flex min-h-screen flex-col bg-background">
       <main className="flex-1">
         <div className="container mx-auto px-4 py-12 md:max-w-3xl md:py-16">
@@ -407,6 +412,6 @@ export default function QualifyPage() {
         </div>
       </main>
     </div>
-    
+  
   )
 }
