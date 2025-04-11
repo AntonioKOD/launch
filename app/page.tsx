@@ -2,6 +2,7 @@
 
 import type React from "react"
 
+
 import { useState } from "react"
 import Image from "next/image"
 import { ArrowRight, Check } from "lucide-react"
@@ -9,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import logo from '@/public/logo_buildquick.svg'
+
 
 
 export default function QualifyPage() {
@@ -100,6 +102,7 @@ export default function QualifyPage() {
   }
 
   return (
+
     <div className="flex min-h-screen flex-col bg-background">
       <main className="flex-1">
         <div className="container mx-auto px-4 py-12 md:max-w-3xl md:py-16">
@@ -404,5 +407,6 @@ export default function QualifyPage() {
         </div>
       </main>
     </div>
+    
   )
 }
